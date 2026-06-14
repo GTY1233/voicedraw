@@ -460,15 +460,15 @@ button.pill.danger:hover .ic { color: var(--danger); }
 }
 /* 小熊头像容器 */
 .bear {
-  width: 84px; height: 92px; flex-shrink: 0; border-radius: 18px; position: relative;
+  width: 84px; aspect-ratio: 9 / 16; flex-shrink: 0; position: relative;
   display: grid; place-items: center; overflow: visible;
-  background: #FCF4E4;
-  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--border));
-  box-shadow: var(--shadow-card);
-  transition: background var(--t-base-dur) var(--ease), border-color var(--t-base-dur) var(--ease), box-shadow var(--t-base-dur) var(--ease);
+  background: transparent; border: none; box-shadow: none;
 }
 .bear svg { display: block; width: 60px; height: 60px; }
-.bear .bear-img, .bear .bear-video { width: 100%; height: 100%; border-radius: 18px; object-fit: contain; display: block; }
+.bear .bear-img, .bear .bear-video {
+  width: 100%; height: 100%; object-fit: contain; display: block;
+  filter: drop-shadow(0 4px 10px rgba(120, 70, 20, .18));
+}
 /* 状态光环 */
 .bear::after {
   content: ''; position: absolute; inset: -3px; border-radius: 21px; pointer-events: none;

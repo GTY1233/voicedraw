@@ -124,13 +124,7 @@ export default function Assistant({ bearImg }: { bearImg?: string } = {}) {
       <div className="bear">
         {bearImg
           ? <img className="bear-img" src={bearImg} alt="小绘" />
-          : <video
-              className="bear-video"
-              key={clip}
-              src={`/bear/${clip}.mp4`}
-              autoPlay loop muted playsInline
-              onCanPlay={(e) => { e.currentTarget.play().catch(() => {}) }}
-            />}
+          : <img className="bear-video" key={clip} src={`/bear/${clip}.webp`} alt="小绘" />}
       </div>
       <div className="bear-bubble">
         <div className="bear-name">小绘<span className="state-tag">{TAG[status]}</span></div>

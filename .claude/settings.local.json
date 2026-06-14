@@ -43,7 +43,21 @@
       "Bash(cp \"/c/Users/61614/Downloads/说话.mp4\"   public/bear/talking.mp4)",
       "Bash(cp \"/c/Users/61614/Downloads/画画.mp4\"   public/bear/drawing.mp4)",
       "Bash(cp \"/c/Users/61614/Downloads/画图成功.mp4\" public/bear/success.mp4)",
-      "Bash(git check-ignore *)"
+      "Bash(git check-ignore *)",
+      "Bash(ffmpeg -y -hide_banner -loglevel error -i public/bear/idle.mp4 -vf colorkey=0x000000:0.12:0.06,scale=400:-2,format=yuva420p -c:v libvpx-vp9 -pix_fmt yuva420p -b:v 0 -crf 34 -an public/bear/idle.webm)",
+      "Bash(ffprobe -v error -select_streams v:0 -show_entries stream=pix_fmt,width,height -of csv=p=0 public/bear/idle.webm)",
+      "Bash(ffmpeg -y -hide_banner -loglevel error -i public/bear/idle.mp4 -vf format=rgba,colorkey=0x000000:0.16:0.10,scale=400:-2 -c:v libvpx-vp9 -pix_fmt yuva420p -auto-alt-ref 0 -b:v 0 -crf 34 -an public/bear/idle.webm)",
+      "Bash(awk '{print $5}')",
+      "Bash(ffmpeg -y -hide_banner -loglevel error -f lavfi -i color=red:s=400x712 -i public/bear/idle.webm -filter_complex [0][1]overlay=shortest=1 -frames:v 1 docs/_alpha_check.png)",
+      "Bash(awk '{print \"check帧:\", $5, \"bytes\"}')",
+      "Bash(ffmpeg -y -hide_banner -loglevel error -i public/bear/idle.mp4 -vf format=rgba,colorkey=0x000000:0.18:0.10,scale=400:-2 -c:v libvpx -pix_fmt yuva420p -auto-alt-ref 0 -b:v 1500k -an public/bear/idle.webm)",
+      "Bash(ffprobe -v error -select_streams v:0 -show_entries stream=pix_fmt -of csv=p=0 public/bear/idle.webm)",
+      "Bash(ffmpeg -y -hide_banner -loglevel error -f lavfi -i color=0x33aa33:s=400x712 -i public/bear/idle.webm -filter_complex [0][1]overlay=shortest=1 -frames:v 1 docs/_v8check.png)",
+      "Bash(ffmpeg -y -hide_banner -loglevel error -i public/bear/idle.mp4 -vf format=rgba,colorkey=0x000000:0.18:0.10,scale=200:-2,fps=15 -plays 0 -f apng public/bear/idle.apng)",
+      "Bash(awk '{print int\\($5/1024\\)\" KB\"}')",
+      "Bash(ffprobe -v error -show_entries format=duration -of csv=p=0 public/bear/idle.mp4)",
+      "Bash(ffmpeg -hide_banner -encoders)",
+      "Bash(ffmpeg -y -hide_banner -loglevel error -i public/bear/idle.mp4 -vf format=rgba,colorkey=0x000000:0.18:0.10,scale=220:-2,fps=18 -an -loop 0 -c:v libwebp_anim -lossless 0 -q:v 68 -compression_level 5 public/bear/idle.webp)"
     ]
   }
 }
