@@ -7,7 +7,7 @@
 
 ## 🎬 参赛演示视频
 
-👉 https://space.bilibili.com/35413134?spm_id_from=333.1007.0.0
+👉 https://www.bilibili.com/video/BV1JkJK6qE4u/
 
 ## ✨ 功能亮点
 
