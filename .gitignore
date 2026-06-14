@@ -1,0 +1,22 @@
+# 密钥与本地环境 —— 绝不提交
+.env
+.env.local
+*.key
+
+# 依赖与构建产物
+node_modules/
+dist/
+build/
+.vite/
+
+# 日志与缓存
+*.log
+.cache/
+.DS_Store
+
+# 本地测试产物（API 返回的图片/JSON 样本，非源码）
+docs/samples/
+
+# 编辑器
+.vscode/
+.idea/
