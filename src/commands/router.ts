@@ -178,7 +178,13 @@ function stripGenPrefix(t: string) {
 }
 
 // ===== 对话式确认 =====
-const AFFIRM = /^(对|对的|对对|是|是的|没错|可以|可以了|确认|确定|好|好的|嗯|就这样|没问题|行|要|画吧|开始|发吧|ok)[。.!！]*$/i
+// 宽松判断"肯定"：去掉空格/标点后，短句、含肯定词、且不含否定或修正词
+function isAffirm(t: string): boolean {
+  const s = t.replace(/[\s，,。.、!！?？~～:：]/g, '')
+  if (!s || s.length > 8) return false
+  if (/(不对|不是|不行|不要|别|换成|应该|而是|重新|再来|不好)/.test(s)) return false
+  return /(对|是的?|嗯|好的?|可以|可以了|确认|确定|没问题|没错|行|行了|开始|发吧|ok)/i.test(s)
+}
 const CANCEL = /(取消|算了|不要了|不画了|不改了|先不|不用了)/
 const ESCAPE = /(效率模式|创意模式|清空|撤销|重做|流程图|组织架构图|架构图|思维导图|树状图|线框图|导出|下载|保存图)/
 
@@ -186,9 +192,11 @@ const ESCAPE = /(效率模式|创意模式|清空|撤销|重做|流程图|组织
 async function handlePending(text: string): Promise<boolean> {
   const app = useApp.getState()
   const p = app.pending!
+  // 忽略 TTS 自我回声（识别到了小熊自己念的确认话术，避免误判为"修正"而陷入循环）
+  if (/(满意就说|说.{0,2}对.{0,2}确认|这样的画面吗|修改这张图吗|要按「|或说出修正)/.test(text)) return true
   if (CANCEL.test(text)) { app.setPending(null); feedback('好的，已取消'); return true }
   if (ESCAPE.test(text)) { app.setPending(null); return false }
-  if (AFFIRM.test(text.trim())) {
+  if (isAffirm(text)) {
     app.setPending(null)
     if (p.kind === 'generate') await fireGenerate(p.prompt)
     else await fireEdit(p.prompt)
